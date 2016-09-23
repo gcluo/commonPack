@@ -1,0 +1,172 @@
+@charset 'utf-8';
+
+// Sizing shortcuts
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+
+// center
+@mixin center($width: null, $height: null) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @if not $width and not $height {
+        transform: translate(-50%, -50%);
+    }
+    @else if $width and $height {
+        width: $width;
+        height: $height;
+        margin: -($width / 2) #{0 0} -($height / 2);
+    }
+    @else if not $height {
+        width: $width;
+        margin-left: -($width / 2);
+        transform: translateY(-50%);
+    }
+    @else {
+        height: $height;
+        margin-top: -($height / 2);
+        transform: translateX(-50%);
+    }
+}
+
+// border-radius
+@mixin radius($radius:5px,$dir:null){
+  @if not $dir {
+      border-radius: $radius;
+  }
+  @if($dir == top){
+    border-top-right-radius: $radius;
+     border-top-left-radius: $radius;
+  }
+  @else if ($dir == right) {
+    border-bottom-right-radius: $radius;
+       border-top-right-radius: $radius;
+  }
+  @else if ($dir == bottom) {
+    border-bottom-right-radius: $radius;
+     border-bottom-left-radius: $radius;
+  }
+  @else if ($dir == left) {
+    border-bottom-left-radius: $radius;
+       border-top-left-radius: $radius;
+  }
+}
+
+// triangle
+@mixin triangle ($size, $color, $direction) {
+    height: 0;
+    width: 0;
+    @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left) {
+        border-color: transparent;
+        border-style: solid;
+        border-width: $size / 2;
+        @if $direction == up {
+            border-bottom-color: $color;
+        }
+        @else if $direction == right {
+            border-left-color: $color;
+        }
+        @else if $direction == down {
+            border-top-color: $color;
+        }
+        @else if $direction == left {
+            border-right-color: $color;
+        }
+    }
+    @else if ($direction == up-right) or ($direction == up-left) {
+         @if $direction == up-right{
+            border-left: $size solid transparent;
+        }
+        @else if $direction == up-left {
+            border-right: $size solid transparent;
+        }
+    }
+    @else if ($direction == down-right) or ($direction == down-left) {
+         @if $direction == down-right{
+            border-left: $size solid transparent;
+        }
+        @else if $direction == down-left {
+            border-right: $size solid transparent;
+        }
+    }
+}
+
+// Easy and quick CSS positioning
+@mixin position($position, $args) {
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i and
+        $i + 1 <= length($args) and
+        type-of(nth($args, $i + 1)) == number {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+// Positioning helpers
+@mixin absolute($args: '') {
+  @include position(absolute, $args);
+}
+
+@mixin fixed($args: '') {
+  @include position(fixed, $args);
+}
+
+@mixin relative($args: '') {
+  @include position(relative, $args);
+}
+
+// Responsive manager.
+// @param {String} $breakpoint - Breakpoint
+// @requires $breakpoints
+@mixin respond-to($grid-breakpoints) {
+  $raw-query: map-get($grid-breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(type-of($raw-query) == 'string', unquote($raw-query), inspect($raw-query));
+
+    @media screen and #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+// clear float for children DOM
+@mixin clearfix() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin hover-focus {
+  @if $enable-hover-media-query {
+    &:focus {
+      @content;
+    }
+
+    @include hover {
+      @content;
+    }
+  } @else {
+    &:focus,
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin tab-focus() {
+  // Default
+  outline: thin dotted;
+  // WebKit
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}

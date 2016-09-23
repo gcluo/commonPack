@@ -1,0 +1,65 @@
+@charset 'utf-8';
+
+// spacing row define
+$global-spacing: 1.6rem !default;
+
+// base font family
+$font-sans: 'San Francisco', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-mono: Menlo, Monaco, Consolas, 'Courier New', monospace !default;
+
+// base color setting
+$base-text-color: lighten(black, 15%) !default;
+$base-font-size : 1.6rem !default; //16px
+$base-background: #fff !default;
+$base-color-link: #3ca29b !default;
+
+
+// respond breakpoint define
+// Extra small screen / phone
+$screen-xs:   480px   !default;
+// Small screen / tablet
+$screen-sm:   768px   !default;
+// Medium screen / desktop
+$screen-md:   992px   !default;
+// Large screen / wide desktop
+$screen-lg:   1200px  !default;
+
+$breakpoints: (
+  'xs': (min-width: $screen-xs),
+  'sm': (min-width: $screen-sm),
+  'md': (min-width: $screen-md),
+  'lg': (min-width: $screen-lg)
+);
+
+//项目变量
+$form-width: 355px;
+$form-group-h: 33px;
+
+$input-radius: 18px;
+
+$primary: rgb(246, 113, 36);
+$bg-gray:rgb(226, 227, 231);
+$bd-gray:rgb(219, 220, 221);
+
+$container-w: 880px;
+$container-h: 670px;
+
+$normal-padding: 20px;
+
+$content-w: 355px;
+
+$tabs-w: 355px;
+$tabs-h: 30px;
+
+//置换页面
+$introduce-w:745px;
+$introduce-h:650px;
+
+//延保页面
+$retain-w:530px;
+$card-w:270px;
+
+//我的方案
+$project-h: 550px;
+$project-w: 820px;
+$radius:10px;
