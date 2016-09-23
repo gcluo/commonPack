@@ -1,13 +1,11 @@
 ###项目介绍
->使用angularjs作为主要框架，node作为服务器。移动端布局采用rem方式。
-
+>使用随便哪个作为主要框架
 ###安装方式介绍
 ####dev运行
 1.npm install
-2.npm run start-dev
-####production运行
-1.npm install
-2.npm run start
+2.npm run dev
+####打包
+npm run production
 
 ###相关技术介绍
 ####scss
