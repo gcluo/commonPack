@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "gulp watch",
-    "dev": "NODE_ENV=dev node webpack.dev.server.js && gulp watch",
+    "dev": "NODE_ENV=dev node webpack.dev.server.js & gulp watch",
     "clean": "gulp clean",
     "cpstatic": "gulp cpstatic",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
